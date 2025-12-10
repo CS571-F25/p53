@@ -116,7 +116,7 @@ export default function Signup() {
                             </Alert>
                         )}
 
-                        <Form.Group className="mb-4">
+                        <Form.Group className="mb-4" controlId="signup-username">
                             <Form.Label style={{
                                 fontWeight: 600,
                                 color: 'var(--text-primary)',
@@ -152,7 +152,7 @@ export default function Signup() {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-4">
+                        <Form.Group className="mb-4" controlId="signup-password">
                             <Form.Label style={{
                                 fontWeight: 600,
                                 color: 'var(--text-primary)',
@@ -187,7 +187,7 @@ export default function Signup() {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-4">
+                        <Form.Group className="mb-4" controlId="signup-confirm-password">
                             <Form.Label style={{
                                 fontWeight: 600,
                                 color: 'var(--text-primary)',

@@ -309,7 +309,7 @@ export default function CardUploadForm({ onCardAdded }) {
                   <div className="mt-2">
                     <img
                       src={formData.image}
-                      alt="Card preview"
+                      alt=""
                       style={{
                         maxWidth: '200px',
                         maxHeight: '200px',

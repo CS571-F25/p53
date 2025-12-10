@@ -107,7 +107,7 @@ export default function Login() {
                             </Alert>
                         )}
 
-                        <Form.Group className="mb-4">
+                        <Form.Group className="mb-4" controlId="login-username">
                             <Form.Label style={{
                                 fontWeight: 600,
                                 color: 'var(--text-primary)',
@@ -142,7 +142,7 @@ export default function Login() {
                             />
                         </Form.Group>
 
-                        <Form.Group className="mb-4">
+                        <Form.Group className="mb-4" controlId="login-password">
                             <Form.Label style={{
                                 fontWeight: 600,
                                 color: 'var(--text-primary)',

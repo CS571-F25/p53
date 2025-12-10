@@ -81,7 +81,7 @@ export default function CardFilter({ filters, onFilterChange, cards = [] }) {
         </Card.Title>
         <Row>
           <Col md={3} sm={6}>
-            <Form.Group className="mb-3" ref={searchRef}>
+            <Form.Group className="mb-3" ref={searchRef} controlId="filter-search">
               <Form.Label style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                 Search
               </Form.Label>
@@ -148,7 +148,7 @@ export default function CardFilter({ filters, onFilterChange, cards = [] }) {
             </Form.Group>
           </Col>
           <Col md={3} sm={6}>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" controlId="filter-game">
               <Form.Label style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                 Game/Sport
               </Form.Label>
@@ -181,7 +181,7 @@ export default function CardFilter({ filters, onFilterChange, cards = [] }) {
             </Form.Group>
           </Col>
           <Col md={3} sm={6}>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" controlId="filter-grade">
               <Form.Label style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                 Grade
               </Form.Label>
@@ -214,7 +214,7 @@ export default function CardFilter({ filters, onFilterChange, cards = [] }) {
             </Form.Group>
           </Col>
           <Col md={3} sm={6}>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" controlId="filter-sort">
               <Form.Label style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                 Sort By
               </Form.Label>

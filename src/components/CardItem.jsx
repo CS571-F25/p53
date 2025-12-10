@@ -83,7 +83,7 @@ export default function CardItem({ card, showDelete = false, onDelete, showFavor
           variant="top"
           src={card.image || 'https://placehold.co/200x280/cccccc/666666?text=No+Image'}
           onError={handleImageError}
-          alt={card.name}
+          alt=""
           style={{
             height: '100%',
             width: '100%',
@@ -128,6 +128,7 @@ export default function CardItem({ card, showDelete = false, onDelete, showFavor
               <span style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Grade:</span>{' '}
               <Badge
                 bg="info"
+                text="dark"
                 style={{
                   fontSize: '0.85rem',
                   padding: '0.35rem 0.75rem',
