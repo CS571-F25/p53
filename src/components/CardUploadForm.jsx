@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { IconCheck, IconPlus } from './Icons';
 import { Form, Button, Card, Row, Col, Alert } from 'react-bootstrap';
 import { addCard } from '../utils/storage';
 import { isLoggedIn } from '../utils/api';
@@ -145,11 +147,41 @@ export default function CardUploadForm({ onCardAdded }) {
   };
 
   return (
-    <Card className="mb-4">
-      <Card.Body>
-        <Card.Title>Add New Card</Card.Title>
+    <Card
+      className="mb-4"
+      style={{
+        border: 'none',
+        borderRadius: 'var(--radius-lg)',
+        boxShadow: 'var(--shadow-md)',
+        backgroundColor: 'var(--bg-primary)'
+      }}
+    >
+      <Card.Body style={{ padding: '2rem' }}>
+        <Card.Title style={{
+          fontSize: '1.75rem',
+          fontWeight: 700,
+          marginBottom: '1.5rem',
+          color: 'var(--text-primary)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.5rem'
+        }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center' }}><IconPlus /></span> Add New Card
+        </Card.Title>
         {error && (
-          <Alert variant="danger" dismissible onClose={() => setError('')}>
+          <Alert
+            variant="danger"
+            dismissible
+            onClose={() => setError('')}
+            style={{
+              borderRadius: 'var(--radius-md)',
+              border: 'none',
+              backgroundColor: 'var(--danger-bg)',
+              color: 'var(--danger-hover)',
+              fontWeight: 500
+            }}
+          >
             {error}
           </Alert>
         )}
@@ -250,7 +282,7 @@ export default function CardUploadForm({ onCardAdded }) {
                   onChange={handleImageUpload}
                 />
                 <Form.Text className="text-muted">
-                  Images will be automatically compressed. For best results, use an image URL below.
+                  Images will be automatically compressed. For best results, use an image URL.
                 </Form.Text>
               </Form.Group>
             </Col>
@@ -282,8 +314,8 @@ export default function CardUploadForm({ onCardAdded }) {
                         maxWidth: '200px',
                         maxHeight: '200px',
                         objectFit: 'contain',
-                        border: '1px solid #dee2e6',
-                        borderRadius: '4px'
+                        border: '1px solid var(--border-color-light)',
+                        borderRadius: 'var(--radius-sm)'
                       }}
                       onError={(e) => {
                         e.target.style.display = 'none';
@@ -308,9 +340,42 @@ export default function CardUploadForm({ onCardAdded }) {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Adding Card...' : 'Add Card to Collection'}
-          </Button>
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={isSubmitting}
+              style={{
+                padding: '0.875rem 2.5rem',
+                fontSize: '1.05rem',
+                fontWeight: 600,
+                borderRadius: 'var(--radius-md)',
+                boxShadow: 'var(--shadow-sm)',
+                transition: 'all var(--transition-fast)',
+                minWidth: '200px'
+              }}
+              onMouseEnter={(e) => {
+                if (!isSubmitting) {
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = 'var(--shadow-md)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = 'var(--shadow-sm)';
+              }}
+            >
+              {isSubmitting ? (
+                <>
+                  <IconCheck /> Adding Card...
+                </>
+              ) : (
+                <>
+                  <IconPlus /> Add Card to Collection
+                </>
+              )}
+            </Button>
+          </div>
         </Form>
       </Card.Body>
     </Card>

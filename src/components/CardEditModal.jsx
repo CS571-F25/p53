@@ -271,8 +271,8 @@ export default function CardEditModal({ show, onHide, card, onSave }) {
                         maxWidth: '200px',
                         maxHeight: '200px',
                         objectFit: 'contain',
-                        border: '1px solid #dee2e6',
-                        borderRadius: '4px'
+                        border: '1px solid var(--border-color-light)',
+                        borderRadius: 'var(--radius-sm)'
                       }}
                       onError={(e) => {
                         e.target.style.display = 'none';
