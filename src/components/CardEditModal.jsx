@@ -1,9 +1,7 @@
-import { useState } from 'react';
-import { Form, Button, Card, Row, Col, Alert } from 'react-bootstrap';
-import { addCard } from '../utils/storage';
-import { isLoggedIn } from '../utils/api';
+import { useState, useEffect } from 'react';
+import { Modal, Form, Button, Row, Col, Alert } from 'react-bootstrap';
 
-export default function CardUploadForm({ onCardAdded }) {
+export default function CardEditModal({ show, onHide, card, onSave }) {
   const [formData, setFormData] = useState({
     name: '',
     game: '',
@@ -13,8 +11,23 @@ export default function CardUploadForm({ onCardAdded }) {
     image: '',
     notes: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState('');
+
+  // Update form data when card changes
+  useEffect(() => {
+    if (card) {
+      setFormData({
+        name: card.name || '',
+        game: card.game || '',
+        set: card.set || '',
+        condition: card.condition || '',
+        grade: card.grade || '',
+        image: card.image || '',
+        notes: card.notes || ''
+      });
+    }
+  }, [card]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -80,15 +93,12 @@ export default function CardUploadForm({ onCardAdded }) {
     if (!file) return;
 
     try {
-      setError('Compressing image...');
-
       // Compress the image
       const compressedImage = await compressImage(file, 45); // Target 45KB to leave room
 
       // Check final size
       const finalSizeKB = (compressedImage.length * 0.75) / 1024;
-      console.log(`Compressed image size: ${finalSizeKB.toFixed(1)}KB`);
-
+      
       if (finalSizeKB > 50) {
         setError(`Image is still too large after compression (${finalSizeKB.toFixed(1)}KB). Please use a smaller image or provide an image URL instead.`);
         e.target.value = '';
@@ -108,46 +118,25 @@ export default function CardUploadForm({ onCardAdded }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Check if user is logged in
-    if (!isLoggedIn()) {
-      setError('You must be logged in to add cards. Please visit Settings to login or sign up.');
-      return;
-    }
-
-    setIsSubmitting(true);
+    setIsSaving(true);
     setError('');
 
     try {
-      // Add the card via API
-      const newCard = await addCard(formData);
-
-      // Reset form
-      setFormData({
-        name: '',
-        game: '',
-        set: '',
-        condition: '',
-        grade: '',
-        image: '',
-        notes: ''
-      });
-
-      // Notify parent component
-      if (onCardAdded) {
-        onCardAdded(newCard);
-      }
+      await onSave(card.id, formData);
+      onHide();
     } catch (err) {
-      setError(err.message || 'Failed to add card. Please try again.');
+      setError(err.message || 'Failed to update card. Please try again.');
     } finally {
-      setIsSubmitting(false);
+      setIsSaving(false);
     }
   };
 
   return (
-    <Card className="mb-4">
-      <Card.Body>
-        <Card.Title>Add New Card</Card.Title>
+    <Modal show={show} onHide={onHide} size="lg">
+      <Modal.Header closeButton>
+        <Modal.Title>Edit Card</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         {error && (
           <Alert variant="danger" dismissible onClose={() => setError('')}>
             {error}
@@ -238,9 +227,6 @@ export default function CardUploadForm({ onCardAdded }) {
                 </Form.Text>
               </Form.Group>
             </Col>
-          </Row>
-
-          <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Image</Form.Label>
@@ -250,11 +236,14 @@ export default function CardUploadForm({ onCardAdded }) {
                   onChange={handleImageUpload}
                 />
                 <Form.Text className="text-muted">
-                  Images will be automatically compressed. For best results, use an image URL below.
+                  Upload new image (auto-compressed)
                 </Form.Text>
               </Form.Group>
             </Col>
-            <Col md={6}>
+          </Row>
+
+          <Row>
+            <Col md={12}>
               <Form.Group className="mb-3">
                 <Form.Label>Or Image URL</Form.Label>
                 <Form.Control
@@ -308,11 +297,16 @@ export default function CardUploadForm({ onCardAdded }) {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Adding Card...' : 'Add Card to Collection'}
-          </Button>
+          <div className="d-flex gap-2 justify-content-end">
+            <Button variant="secondary" onClick={onHide} disabled={isSaving}>
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit" disabled={isSaving}>
+              {isSaving ? 'Saving...' : 'Save Changes'}
+            </Button>
+          </div>
         </Form>
-      </Card.Body>
-    </Card>
+      </Modal.Body>
+    </Modal>
   );
 }
