@@ -145,7 +145,7 @@ export default function CardEditModal({ show, onHide, card, onSave }) {
         <Form onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="edit-name">
                 <Form.Label>Card Name*</Form.Label>
                 <Form.Control
                   type="text"
@@ -159,7 +159,7 @@ export default function CardEditModal({ show, onHide, card, onSave }) {
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="edit-game">
                 <Form.Label>Game/Sport*</Form.Label>
                 <Form.Control
                   type="text"
@@ -176,7 +176,7 @@ export default function CardEditModal({ show, onHide, card, onSave }) {
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="edit-set">
                 <Form.Label>Set*</Form.Label>
                 <Form.Control
                   type="text"
@@ -190,7 +190,7 @@ export default function CardEditModal({ show, onHide, card, onSave }) {
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="edit-condition">
                 <Form.Label>Condition*</Form.Label>
                 <Form.Select
                   name="condition"
@@ -212,7 +212,7 @@ export default function CardEditModal({ show, onHide, card, onSave }) {
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="edit-grade">
                 <Form.Label>Grade</Form.Label>
                 <Form.Control
                   type="text"
@@ -228,7 +228,7 @@ export default function CardEditModal({ show, onHide, card, onSave }) {
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="edit-image-file">
                 <Form.Label>Image</Form.Label>
                 <Form.Control
                   type="file"
@@ -244,7 +244,7 @@ export default function CardEditModal({ show, onHide, card, onSave }) {
 
           <Row>
             <Col md={12}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="edit-image-url">
                 <Form.Label>Or Image URL</Form.Label>
                 <Form.Control
                   type="url"
@@ -266,7 +266,7 @@ export default function CardEditModal({ show, onHide, card, onSave }) {
                   <div className="mt-2">
                     <img
                       src={formData.image}
-                      alt="Card preview"
+                      alt=""
                       style={{
                         maxWidth: '200px',
                         maxHeight: '200px',
@@ -284,7 +284,7 @@ export default function CardEditModal({ show, onHide, card, onSave }) {
             </Row>
           )}
 
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-3" controlId="edit-notes">
             <Form.Label>Notes</Form.Label>
             <Form.Control
               as="textarea"

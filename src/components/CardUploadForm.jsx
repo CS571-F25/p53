@@ -188,7 +188,7 @@ export default function CardUploadForm({ onCardAdded }) {
         <Form onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="add-name">
                 <Form.Label>Card Name*</Form.Label>
                 <Form.Control
                   type="text"
@@ -202,7 +202,7 @@ export default function CardUploadForm({ onCardAdded }) {
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="add-game">
                 <Form.Label>Game/Sport*</Form.Label>
                 <Form.Control
                   type="text"
@@ -219,7 +219,7 @@ export default function CardUploadForm({ onCardAdded }) {
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="add-set">
                 <Form.Label>Set*</Form.Label>
                 <Form.Control
                   type="text"
@@ -233,7 +233,7 @@ export default function CardUploadForm({ onCardAdded }) {
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="add-condition">
                 <Form.Label>Condition*</Form.Label>
                 <Form.Select
                   name="condition"
@@ -255,7 +255,7 @@ export default function CardUploadForm({ onCardAdded }) {
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="add-grade">
                 <Form.Label>Grade</Form.Label>
                 <Form.Control
                   type="text"
@@ -274,7 +274,7 @@ export default function CardUploadForm({ onCardAdded }) {
 
           <Row>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="add-image-file">
                 <Form.Label>Image</Form.Label>
                 <Form.Control
                   type="file"
@@ -287,7 +287,7 @@ export default function CardUploadForm({ onCardAdded }) {
               </Form.Group>
             </Col>
             <Col md={6}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" controlId="add-image-url">
                 <Form.Label>Or Image URL</Form.Label>
                 <Form.Control
                   type="url"
@@ -327,7 +327,7 @@ export default function CardUploadForm({ onCardAdded }) {
             </Row>
           )}
 
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-3" controlId="add-notes">
             <Form.Label>Notes</Form.Label>
             <Form.Control
               as="textarea"
