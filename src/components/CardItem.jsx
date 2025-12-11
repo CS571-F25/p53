@@ -83,7 +83,7 @@ export default function CardItem({ card, showDelete = false, onDelete, showFavor
           variant="top"
           src={card.image || 'https://placehold.co/200x280/cccccc/666666?text=No+Image'}
           onError={handleImageError}
-          alt=""
+          alt={`${card.name} from ${card.game} - ${card.set} set`}
           style={{
             height: '100%',
             width: '100%',
